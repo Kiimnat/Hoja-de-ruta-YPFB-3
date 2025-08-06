@@ -41,16 +41,8 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const instructivoTexto = doc.splitTextToSize(instructivo, 185);
   doc.text(instructivoTexto, 12, 118);
 
- // Abre la vista para imprimir
-  const pdfUrl = doc.output('bloburl');
-  const printWindow = window.open(pdfUrl);
-  printWindow.focus();
-  printWindow.onload = function() {
+   printWindow.onload = function () {
     printWindow.print();
+    form.reset();  // Limpia el formulario justo después de abrir impresión
   };
-
-  // Limpia el formulario 1 segundo después para que no borre antes de imprimir
-  setTimeout(() => {
-    form.reset();
-  }, 1000);
 });
