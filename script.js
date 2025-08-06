@@ -12,11 +12,17 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const cargo1 = document.getElementById("cargoDestinatario").value;
   const instructivo1 = document.getElementById("instructivo").value;
 
-  // Aquí deberías obtener los datos del segundo destinatario igual que el primero
-  // Por ahora pongo datos fijos para ejemplo
-  const destinatario2 = "Juan Pérez";
-  const cargo2 = "Jefe de Área";
-  const instructivo2 = "Segundo instructivo de ejemplo para el destinatario 2.";
+// Recuadro primer destinatario
+  doc.setFont("helvetica", "bold");
+  doc.rect(10, 100, 190, 30);
+  doc.text("SEGUNDO DESTINATARIO:", 12, 105);
+  doc.setFont("helvetica", "normal");
+  doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 105);
+ doc.setFont("helvetica", "bold");
+  doc.text("INSTRUCTIVO:", 12, 113);
+  doc.setFont("helvetica", "normal");
+  const instructivoTexto = doc.splitTextToSize(instructivo, 185);
+  doc.text(instructivoTexto, 12, 113);
 
   const contenidoHTML = `
     <html>
