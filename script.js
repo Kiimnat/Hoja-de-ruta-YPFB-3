@@ -1,42 +1,59 @@
-function actualizarCargoDestinatario() {
-  const select = document.getElementById("destinatarioSelect");
-  const valor = select.value;
+// Actualiza el cargo del destinatario automáticamente cuando cambias la selección
+document.getElementById("destinatarioSelect").addEventListener("change", function() {
+  const valor = this.value;
   const campoCargoDestinatario = document.getElementById("cargoDestinatario");
 
   if (valor.includes("|")) {
-    const [nombre, cargo] = valor.split("|");
+    const [, cargo] = valor.split("|");
     campoCargoDestinatario.value = cargo;
   } else {
     campoCargoDestinatario.value = "";
   }
-}
+});
 
 document.getElementById("correspondenciaForm").addEventListener("submit", function (e) {
   e.preventDefault();
-
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
 
   const destinatarioRaw = document.getElementById("destinatarioSelect").value;
   const [destinatario] = destinatarioRaw.split("|");
   const cargo = document.getElementById("cargoDestinatario").value;
   const instructivo = document.getElementById("instructivo").value;
 
-  // Contenido para el PDF
-  const contenido = `${destinatario} - ${cargo}\n\n${instructivo}`;
+  const contenidoHTML = `
+    <html>
+    <head>
+      <title>Hoja de Correspondencia</title>
+      <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .recuadro {
+          border: 2px solid black;
+          padding: 15px;
+          border-radius: 8px;
+          width: 500px;
+          margin: auto;
+          font-size: 14px;
+          line-height: 1.4;
+        }
+        strong { display: inline-block; width: 120px; }
+      </style>
+    </head>
+    <body>
+      <div class="recuadro">
+        <p><strong>Destinatario:</strong> ${destinatario}</p>
+        <p><strong>Cargo:</strong> ${cargo}</p>
+        <p><strong>Instructivo:</strong></p>
+        <p>${instructivo.replace(/\n/g, '<br>')}</p>
+      </div>
+      <script>
+        window.onload = function() {
+          window.print();
+        }
+      </script>
+    </body>
+    </html>
+  `;
 
-  // Configuración del PDF
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(12);
-
-  // Dibujar un recuadro donde estará el contenido
-  doc.setDrawColor(0);
-  doc.setLineWidth(0.5);
-  doc.rect(10, 20, 190, 80); // Ajusta posición y tamaño si quieres
-
-  // Insertar texto dentro del recuadro
-  doc.text(contenido, 15, 35, { maxWidth: 180 });
-
-  // Descargar PDF
-  doc.save(`Hoja_Correspondencia_${destinatario.replace(/\s+/g, "_")}.pdf`);
+  const ventana = window.open("", "_blank");
+  ventana.document.write(contenidoHTML);
+  ventana.document.close();
 });
