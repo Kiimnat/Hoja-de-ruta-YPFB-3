@@ -48,4 +48,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   printWindow.onload = function() {
     printWindow.print();
   };
+
+  // Limpiar formulario después de abrir ventana de impresión
+  this.reset();
 });
