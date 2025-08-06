@@ -4,6 +4,15 @@ document.getElementById('correspondenciaForm').addEventListener('submit', async 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
+ const destinatarioRaw = this.destinatarioSelect.value;
+  if (!destinatarioRaw) {
+    alert("Por favor selecciona un destinatario.");
+    return;
+  }
+  const [destinatarioNombre] = destinatarioRaw.split("|");
+  const cargoDestinatario = this.cargoDestinatario.value;
+  const instructivo = this.instructivo.value;
+  
   // Recuadro primer destinatario
   doc.setFont("helvetica", "bold");
   doc.rect(10, 100, 190, 30);
