@@ -29,7 +29,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
 
   // Recuadro con título
   doc.setFontSize(10);
-  
+
   doc.setFont("helvetica", "bold");
   doc.rect(10, 100, 190, 30); // Ampliado a 50 para incluir instructivo
   doc.text("SEGUNDO DESTINATARIO:", 12, 105);
@@ -41,10 +41,11 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const instructivoTexto = doc.splitTextToSize(instructivo, 185);
   doc.text(instructivoTexto, 12, 118);
 
-  // Abre la vista para imprimir (opcional)
-  window.open(doc.output('bloburl'), '_blank');
-
-  // También podrías usar esto para forzar descarga si prefieres:
-  // doc.save("Hoja_Correspondencia.pdf");
+  // Generar URL Blob y abrir nueva ventana para imprimir
+  const pdfUrl = doc.output('bloburl');
+  const printWindow = window.open(pdfUrl);
+  printWindow.focus();
+  printWindow.onload = function() {
+    printWindow.print();
+  };
 });
-
