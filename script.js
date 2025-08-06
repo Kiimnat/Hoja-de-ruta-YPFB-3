@@ -1,28 +1,30 @@
+// Actualiza el cargo del destinatario automáticamente cuando cambias la selección
+document.getElementById("destinatarioSelect").addEventListener("change", function() {
+  const valor = this.value;
+  const campoCargoDestinatario = document.getElementById("cargoDestinatario");
+
+  if (valor.includes("|")) {
+    const [, cargo] = valor.split("|");
+    campoCargoDestinatario.value = cargo;
+  } else {
+    campoCargoDestinatario.value = "";
+  }
+});
+
 document.getElementById("correspondenciaForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const destinatarioRaw1 = document.getElementById("destinatarioSelect").value;
-  if (!destinatarioRaw1) {
+  const destinatarioRaw = document.getElementById("destinatarioSelect").value;
+  if (!destinatarioRaw) {
     alert("Por favor selecciona un destinatario.");
     return;
   }
-  const [destinatario1] = destinatarioRaw1.split("|");
+
+  const [destinatario] = destinatarioRaw.split("|");
   const cargo = document.getElementById("cargoDestinatario").value;
   const instructivo = document.getElementById("instructivo").value;
 
-// Recuadro primer destinatario
-  doc.setFont("helvetica", "bold");
-  doc.rect(10, 100, 190, 30);
-  doc.text("SEGUNDO DESTINATARIO:", 12, 105);
-  doc.setFont("helvetica", "normal");
-  doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 105);
- doc.setFont("helvetica", "bold");
-  doc.text("INSTRUCTIVO:", 12, 113);
-  doc.setFont("helvetica", "normal");
-  const instructivoTexto = doc.splitTextToSize(instructivo, 185);
-  doc.text(instructivoTexto, 12, 113);
-
-  const contenidoHTML = `
+  const contenidoHTML = 
     <html>
     <head>
       <title>Hoja de Correspondencia</title>
@@ -33,7 +35,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
           padding: 15px;
           border-radius: 8px;
           width: 500px;
-          margin: 10px auto;
+          margin: auto;
           font-size: 10pt;
           line-height: 1.4;
         }
@@ -51,21 +53,11 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
     </head>
     <body>
       <div class="recuadro">
-        <p><strong>PRIMER DESTINATARIO:</strong></p>
-        <p><strong>Destinatario:</strong> ${destinatario1}</p>
-        <p><strong>Cargo:</strong> ${cargo1}</p>
+        <p><strong>Destinatario:</strong> ${destinatario}</p>
+        <p><strong>Cargo:</strong> ${cargo}</p>
         <p><strong>Instructivo:</strong></p>
-        <p>${instructivo1.replace(/\n/g, '<br>')}</p>
+        <p>${instructivo.replace(/\n/g, '<br>')}</p>
       </div>
-
-      <div class="recuadro">
-        <p><strong>SEGUNDO DESTINATARIO:</strong></p>
-        <p><strong>Destinatario:</strong> ${destinatario2}</p>
-        <p><strong>Cargo:</strong> ${cargo2}</p>
-        <p><strong>Instructivo:</strong></p>
-        <p>${instructivo2.replace(/\n/g, '<br>')}</p>
-      </div>
-
       <script>
         window.onload = function() {
           window.print();
@@ -73,7 +65,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
       </script>
     </body>
     </html>
-  `;
+  ;
 
   const ventana = window.open("", "_blank");
   ventana.document.write(contenidoHTML);
