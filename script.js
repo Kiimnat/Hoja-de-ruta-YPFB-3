@@ -12,7 +12,9 @@ document.getElementById("destinatarioSelect").addEventListener("change", functio
 
 document.getElementById("correspondenciaForm").addEventListener("submit", function (e) {
   e.preventDefault();
-
+  
+  const form = document.getElementById("correspondenciaForm");
+  
   const destinatarioRaw = document.getElementById("destinatarioSelect").value;
   if (!destinatarioRaw) {
     alert("Por favor selecciona un destinatario.");
@@ -41,8 +43,16 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const instructivoTexto = doc.splitTextToSize(instructivo, 185);
   doc.text(instructivoTexto, 12, 118);
 
-   printWindow.onload = function () {
-    printWindow.print();
-    form.reset();  // Limpia el formulario justo después de abrir impresión
-  };
+  const pdfUrl = doc.output('bloburl');
+  const printWindow = window.open(pdfUrl);
+
+  if (printWindow) {
+    printWindow.focus();
+    printWindow.onload = function () {
+      printWindow.print();
+      form.reset(); // ✅ AHORA FUNCIONA CORRECTAMENTE
+    };
+  } else {
+    alert("Por favor, permite ventanas emergentes para generar e imprimir el documento.");
+  }
 });
