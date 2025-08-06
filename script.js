@@ -34,7 +34,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
 
   doc.setFont("helvetica", "bold");
   doc.rect(10, 100, 190, 30); // Ampliado a 50 para incluir instructivo
-  doc.text("TERCER DESTINATARIO:", 12, 105);
+  doc.text("SEGUNDO DESTINATARIO:", 12, 105);
   doc.setFont("helvetica", "normal");
   doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 105);
   doc.setFont("helvetica", "bold");
