@@ -1,35 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", function () {
   const destinatarioSelect = document.getElementById("destinatarioSelect");
   const cargoDestinatario = document.getElementById("cargoDestinatario");
   const form = document.getElementById("correspondenciaForm");
 
-  // Actualiza el cargo automáticamente
+  // Cambia el cargo automáticamente al seleccionar un destinatario
   destinatarioSelect.addEventListener("change", function () {
-    const valor = this.value;
+    const seleccionado = destinatarioSelect.value;
 
-    if (valor.includes("|")) {
-      const [, cargo] = valor.split("|");
+    if (seleccionado.includes("|")) {
+      const partes = seleccionado.split("|");
+      const cargo = partes[1];
       cargoDestinatario.value = cargo;
     } else {
       cargoDestinatario.value = "";
     }
   });
 
-  // Genera la hoja de correspondencia
+  // Cuando se envía el formulario
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const destinatarioRaw = destinatarioSelect.value;
-    if (!destinatarioRaw) {
+    const seleccionado = destinatarioSelect.value;
+    if (!seleccionado) {
       alert("Por favor selecciona un destinatario.");
       return;
     }
 
-    const [destinatario] = destinatarioRaw.split("|");
-    const cargo = cargoDestinatario.value;
+    const partes = seleccionado.split("|");
+    const nombre = partes[0];
+    const cargo = partes[1];
     const instructivo = document.getElementById("instructivo").value;
 
-    const contenidoHTML = `
+    const nuevaVentana = window.open("", "_blank");
+    nuevaVentana.document.write(`
+      <!DOCTYPE html>
       <html>
       <head>
         <title>Hoja de Correspondencia</title>
@@ -48,17 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
             display: inline-block;
             width: 120px;
             font-weight: bold;
-            font-size: 10pt;
           }
           p {
             margin: 5px 0;
-            font-size: 10pt;
           }
         </style>
       </head>
       <body>
         <div class="recuadro">
-          <p><strong>Destinatario:</strong> ${destinatario}</p>
+          <p><strong>Destinatario:</strong> ${nombre}</p>
           <p><strong>Cargo:</strong> ${cargo}</p>
           <p><strong>Instructivo:</strong></p>
           <p>${instructivo.replace(/\n/g, "<br>")}</p>
@@ -66,14 +68,11 @@ document.addEventListener("DOMContentLoaded", function () {
         <script>
           window.onload = function() {
             window.print();
-          }
+          };
         </script>
       </body>
       </html>
-    `;
-
-    const ventana = window.open("", "_blank");
-    ventana.document.write(contenidoHTML);
-    ventana.document.close();
+    `);
+    nuevaVentana.document.close();
   });
 });
