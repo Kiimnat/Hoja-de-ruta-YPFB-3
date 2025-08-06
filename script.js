@@ -43,16 +43,15 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const instructivoTexto = doc.splitTextToSize(instructivo, 185);
   doc.text(instructivoTexto, 12, 118);
 
-  const pdfUrl = doc.output('bloburl');
-  const printWindow = window.open(pdfUrl);
+const pdfBlob = doc.output("blob");
+const pdfURL = URL.createObjectURL(pdfBlob);
+const printWindow = window.open(pdfURL);
 
-  if (printWindow) {
-    printWindow.focus();
-    printWindow.onload = function () {
-      printWindow.print();
-      form.reset(); // ✅ AHORA FUNCIONA CORRECTAMENTE
-    };
-  } else {
-    alert("Por favor, permite ventanas emergentes para generar e imprimir el documento.");
-  }
-});
+if (printWindow) {
+  printWindow.onload = () => {
+    printWindow.print();
+    document.getElementById("correspondenciaForm").reset();
+  };
+} else {
+  alert("El navegador bloqueó la ventana emergente. Por favor, habilítala.");
+}
