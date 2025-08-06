@@ -9,24 +9,44 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   ventana.document.write(`
     <html>
     <head>
-      <title>Hoja de Correspondencia</title>
+      <title></title> <!-- Sin título -->
       <style>
-        body { font-family: Arial, sans-serif; padding: 40px; }
+        body { 
+          font-family: Arial, sans-serif; 
+          padding: 20px; 
+          margin: 0; 
+        }
         .recuadro {
           border: 2px solid #000;
-          padding: 20px;
+          padding: 15px 20px;
           border-radius: 10px;
+          max-width: 600px;
+          margin: 40px auto 0 auto; /* para que esté más abajo y centrado */
         }
-        h2 { margin-bottom: 20px; }
-        p { margin: 10px 0; }
+        .recuadro h3 {
+          margin: 0 0 10px 0;
+          font-weight: bold;
+          font-size: 18px;
+          text-align: center;
+        }
+        .recuadro .dest-cargo {
+          font-weight: bold;
+          margin-bottom: 12px;
+          font-size: 16px;
+          text-align: center;
+        }
+        .recuadro .instructivo-texto {
+          white-space: pre-wrap; /* para respetar saltos de línea */
+          font-size: 14px;
+          line-height: 1.4;
+        }
       </style>
     </head>
     <body>
       <div class="recuadro">
-        <h2>Hoja de Correspondencia</h2>
-        <p><strong>Destinatario:</strong> ${destinatario}</p>
-        <p><strong>Cargo:</strong> ${cargo}</p>
-        <p><strong>Instructivo:</strong><br>${instructivo}</p>
+        <h3>Segundo destinatario</h3>
+        <div class="dest-cargo">${destinatario} - ${cargo}</div>
+        <div class="instructivo-texto">${instructivo}</div>
       </div>
     </body>
     </html>
