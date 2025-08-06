@@ -14,47 +14,29 @@ function actualizarCargoDestinatario() {
 document.getElementById("correspondenciaForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const destinatario = document.getElementById("destinatarioSelect").value.split("|")[0];
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  const destinatarioRaw = document.getElementById("destinatarioSelect").value;
+  const [destinatario] = destinatarioRaw.split("|");
   const cargo = document.getElementById("cargoDestinatario").value;
   const instructivo = document.getElementById("instructivo").value;
 
-  const ventana = window.open("", "Hoja de Correspondencia", "width=800,height=600");
-  ventana.document.write(`
-    <html>
-    <head>
-      <title></title>
-      <style>
-        body { 
-          font-family: Arial, sans-serif; 
-          padding: 20px; 
-          margin: 0; 
-        }
-        .recuadro {
-          border: 2px solid #000;
-          padding: 15px 20px;
-          border-radius: 10px;
-          max-width: 600px;
-          margin: 40px auto 0 auto;
-          font-size: 14px;
-        }
-        .dest-cargo {
-          font-weight: bold;
-          margin-bottom: 12px;
-        }
-        .instructivo-texto {
-          white-space: pre-wrap;
-          line-height: 1.4;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="recuadro">
-        <div class="dest-cargo">${destinatario} - ${cargo}</div>
-        <div class="instructivo-texto">${instructivo}</div>
-      </div>
-    </body>
-    </html>
-  `);
-  ventana.document.close();
-  ventana.print();
+  // Contenido para el PDF
+  const contenido = `${destinatario} - ${cargo}\n\n${instructivo}`;
+
+  // Configuración del PDF
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+
+  // Dibujar un recuadro donde estará el contenido
+  doc.setDrawColor(0);
+  doc.setLineWidth(0.5);
+  doc.rect(10, 20, 190, 80); // Ajusta posición y tamaño si quieres
+
+  // Insertar texto dentro del recuadro
+  doc.text(contenido, 15, 35, { maxWidth: 180 });
+
+  // Descargar PDF
+  doc.save(`Hoja_Correspondencia_${destinatario.replace(/\s+/g, "_")}.pdf`);
 });
