@@ -33,15 +33,15 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   doc.setFontSize(10);
 
   doc.setFont("helvetica", "bold");
-  doc.rect(10, 100, 190, 30); // Ampliado a 50 para incluir instructivo
-  doc.text("SEGUNDO DESTINATARIO:", 12, 105);
+  doc.rect(10, 130, 190, 30); // Ampliado a 50 para incluir instructivo
+  doc.text("TERCER DESTINATARIO:", 12, 135);
   doc.setFont("helvetica", "normal");
-  doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 105);
+  doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 135);
   doc.setFont("helvetica", "bold");
-  doc.text("INSTRUCTIVO:", 12, 113);
+  doc.text("INSTRUCTIVO:", 12, 143);
   doc.setFont("helvetica", "normal");
   const instructivoTexto = doc.splitTextToSize(instructivo, 185);
-  doc.text(instructivoTexto, 12, 118);
+  doc.text(instructivoTexto, 12, 148);
 
   const pdfUrl = doc.output('bloburl');
   const printWindow = window.open(pdfUrl);
