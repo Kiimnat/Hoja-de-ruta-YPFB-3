@@ -1,5 +1,3 @@
-// Ejemplo simplificado para imprimir 2 recuadros con destinatarios distintos
-
 document.getElementById("correspondenciaForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -9,8 +7,8 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
     return;
   }
   const [destinatario1] = destinatarioRaw1.split("|");
-  const cargo1 = document.getElementById("cargoDestinatario").value;
-  const instructivo1 = document.getElementById("instructivo").value;
+  const cargo = document.getElementById("cargoDestinatario").value;
+  const instructivo = document.getElementById("instructivo").value;
 
 // Recuadro primer destinatario
   doc.setFont("helvetica", "bold");
