@@ -27,6 +27,10 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
+  
+  doc.setFontSize(10);
+
+  
   // Recuadro con título
   doc.setFont("helvetica", "bold");
   doc.rect(10, 100, 190, 30); // Ampliado a 50 para incluir instructivo
