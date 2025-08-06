@@ -1,69 +1,28 @@
-document.getElementById("correspondenciaForm").addEventListener("submit", function (e) {
+document.getElementById('correspondenciaForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  const destinatario = document.getElementById("destinatarioSelect").value.split("|")[0];
-  const cargo = document.getElementById("cargoDestinatario").value;
-  const instructivo = document.getElementById("instructivo").value;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-  const ventana = window.open("", "Hoja de Correspondencia", "width=800,height=600");
-  ventana.document.write(`
-    <html>
-    <head>
-      <title></title> <!-- Sin título -->
-      <style>
-        body { 
-          font-family: Arial, sans-serif; 
-          padding: 20px; 
-          margin: 0; 
-        }
-        .recuadro {
-          border: 2px solid #000;
-          padding: 15px 20px;
-          border-radius: 10px;
-          max-width: 600px;
-          margin: 40px auto 0 auto; /* para que esté más abajo y centrado */
-        }
-        .recuadro h3 {
-          margin: 0 0 10px 0;
-          font-weight: bold;
-          font-size: 18px;
-          text-align: center;
-        }
-        .recuadro .dest-cargo {
-          font-weight: bold;
-          margin-bottom: 12px;
-          font-size: 16px;
-          text-align: center;
-        }
-        .recuadro .instructivo-texto {
-          white-space: pre-wrap; /* para respetar saltos de línea */
-          font-size: 14px;
-          line-height: 1.4;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="recuadro">
-        <h3>Segundo destinatario</h3>
-        <div class="dest-cargo">${destinatario} - ${cargo}</div>
-        <div class="instructivo-texto">${instructivo}</div>
-      </div>
-    </body>
-    </html>
-  `);
-  ventana.document.close();
-  ventana.print();
+  // Recuadro primer destinatario
+  doc.setFont("helvetica", "bold");
+  doc.rect(10, 100, 190, 30);
+  doc.text("SEGUNDO DESTINATARIO:", 12, 105);
+  doc.setFont("helvetica", "normal");
+  doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 105);
+ doc.setFont("helvetica", "bold");
+  doc.text("INSTRUCTIVO:", 12, 113);
+  doc.setFont("helvetica", "normal");
+  const instructivoTexto = doc.splitTextToSize(instructivo, 185);
+  doc.text(instructivoTexto, 12, 118);
+
+  
+  const pdfUrl = doc.output('bloburl');
+  const printWindow = window.open(pdfUrl);
+  printWindow.focus();
+  printWindow.onload = function() {
+    printWindow.print();
+  };
+
+  this.reset();
 });
-
-function actualizarCargoDestinatario() {
-  const select = document.getElementById("destinatarioSelect");
-  const valor = select.value;
-  const campoCargoDestinatario = document.getElementById("cargoDestinatario");
-
-  if (valor.includes("|")) {
-    const [nombre, cargo] = valor.split("|");
-    campoCargoDestinatario.value = cargo;
-  } else {
-    campoCargoDestinatario.value = "";
-  }
-}
