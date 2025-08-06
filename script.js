@@ -1,28 +1,22 @@
-// Actualiza el cargo del destinatario automáticamente cuando cambias la selección
-document.getElementById("destinatarioSelect").addEventListener("change", function() {
-  const valor = this.value;
-  const campoCargoDestinatario = document.getElementById("cargoDestinatario");
-
-  if (valor.includes("|")) {
-    const [, cargo] = valor.split("|");
-    campoCargoDestinatario.value = cargo;
-  } else {
-    campoCargoDestinatario.value = "";
-  }
-});
+// Ejemplo simplificado para imprimir 2 recuadros con destinatarios distintos
 
 document.getElementById("correspondenciaForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const destinatarioRaw = document.getElementById("destinatarioSelect").value;
-  if (!destinatarioRaw) {
+  const destinatarioRaw1 = document.getElementById("destinatarioSelect").value;
+  if (!destinatarioRaw1) {
     alert("Por favor selecciona un destinatario.");
     return;
   }
+  const [destinatario1] = destinatarioRaw1.split("|");
+  const cargo1 = document.getElementById("cargoDestinatario").value;
+  const instructivo1 = document.getElementById("instructivo").value;
 
-  const [destinatario] = destinatarioRaw.split("|");
-  const cargo = document.getElementById("cargoDestinatario").value;
-  const instructivo = document.getElementById("instructivo").value;
+  // Aquí deberías obtener los datos del segundo destinatario igual que el primero
+  // Por ahora pongo datos fijos para ejemplo
+  const destinatario2 = "Juan Pérez";
+  const cargo2 = "Jefe de Área";
+  const instructivo2 = "Segundo instructivo de ejemplo para el destinatario 2.";
 
   const contenidoHTML = `
     <html>
@@ -35,7 +29,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
           padding: 15px;
           border-radius: 8px;
           width: 500px;
-          margin: auto;
+          margin: 10px auto;
           font-size: 10pt;
           line-height: 1.4;
         }
@@ -53,11 +47,21 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
     </head>
     <body>
       <div class="recuadro">
-        <p><strong>Destinatario:</strong> ${destinatario}</p>
-        <p><strong>Cargo:</strong> ${cargo}</p>
+        <p><strong>PRIMER DESTINATARIO:</strong></p>
+        <p><strong>Destinatario:</strong> ${destinatario1}</p>
+        <p><strong>Cargo:</strong> ${cargo1}</p>
         <p><strong>Instructivo:</strong></p>
-        <p>${instructivo.replace(/\n/g, '<br>')}</p>
+        <p>${instructivo1.replace(/\n/g, '<br>')}</p>
       </div>
+
+      <div class="recuadro">
+        <p><strong>SEGUNDO DESTINATARIO:</strong></p>
+        <p><strong>Destinatario:</strong> ${destinatario2}</p>
+        <p><strong>Cargo:</strong> ${cargo2}</p>
+        <p><strong>Instructivo:</strong></p>
+        <p>${instructivo2.replace(/\n/g, '<br>')}</p>
+      </div>
+
       <script>
         window.onload = function() {
           window.print();
