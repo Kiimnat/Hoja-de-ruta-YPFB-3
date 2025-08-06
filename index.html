@@ -12,7 +12,7 @@
     <h1>Hoja de Correspondencia Externa</h1>
     <form id="correspondenciaForm">
       <label for="destinatarioSelect">Destinatario:</label>
-      <select name="destinatario" id="destinatarioSelect" onchange="actualizarCargoDestinatario()" required>
+      <select name="destinatario" id="destinatarioSelect" required>
         <option value="">Seleccionar destinatario</option>
         <option value="ESTEPHANYA ALVAREZ VARGAS|SECRETARIA GENERAL">ESTEPHANYA ALVAREZ VARGAS - SECRETARIA GENERAL</option>
         <option value="CELINA VARGAS NOGALES|CHOFER">CELINA VARGAS NOGALES - CHOFER</option>
@@ -27,4 +27,16 @@
         <option value="FERNANDA CALISAYA TABOADA|SECR. U.A.A">FERNANDA CALISAYA TABOADA - SECR. U.A.A.</option>
       </select>
 
-      <label
+      <label for="cargoDestinatario">Cargo destinatario:</label>
+      <input type="text" id="cargoDestinatario" name="cargoDestinatario" readonly />
+
+      <label for="instructivo">Instructivo:</label>
+      <textarea id="instructivo" name="instructivo" rows="5" required></textarea>
+
+      <button type="submit" id="generarBtn">Generar Hoja de Correspondencia</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
