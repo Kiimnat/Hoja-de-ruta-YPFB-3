@@ -3,38 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Formulario de Correspondencia Externa</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Hoja de Correspondencia - YPFB</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    h1 {
+      text-align: center;
+      color: #006699;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+    }
+    input[readonly] {
+      background-color: #e9e9e9;
+      border: 1px solid #ccc;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      margin-top: 5px;
+      width: 100%;
+    }
+    button {
+      display: block;
+      width: 100%;
+      background-color: #006699;
+      color: white;
+      padding: 10px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #004d66;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Formulario de Correspondencia</h1>
+    <h1>Hoja de Correspondencia Externa</h1>
     <form id="correspondenciaForm">
-      <div class="recuadro">
-        <label for="destinatarioSelect">Destinatario:</label>
-        <select name="destinatario" id="destinatarioSelect" onchange="actualizarCargoDestinatario()" required>
-          <option value="">Seleccionar destinatario</option>
-          <option value="ESTEPHANYA FERNANDA ALVAREZ VARGAS|SECRETARIA GENERAL">ESTEPHANYA FERNANDA ALVAREZ VARGAS - SECRETARIA GENERAL</option>
-          <option value="CELINA VARGAS NOGALES|CHOFER">CELINA VARGAS NOGALES - CHOFER</option>
-          <option value="PAOLA ALEXANDRA MOREIRA LEON|SECR. U.R.G.D">PAOLA ALEXANDRA MOREIRA LEON - SECR. U.R.G.D.</option>
-          <option value="KIMBERLY NATALY PONCE ROMERO|TECNICA DE CAMPO">KIMBERLY NATALY PONCE ROMERO - TECNICA DE CAMPO</option>
-          <option value="ABIGAIL ROJAS ISIDRO|PRESIDENTA REGIONAL">ABIGAIL ROJAS ISIDRO - PRESIDENTA REGIONAL</option>
-          <option value="FERNANDA CALISAYA TABOADA|JEFA J.R.C.S.">FERNANDA CALISAYA TABOADA - JEFA J.R.C.S.</option>
-          <option value="CELINA VARGAS NOGALES|RECEPCIONISTA">CELINA VARGAS NOGALES - RECEPCIONISTA</option>
-          <option value="ESTEPHANYA FERNANDA ALVAREZ VARGAS|JEFA U.A.A.">ESTEPHANYA FERNANDA ALVAREZ VARGAS - JEFA U.A.A</option>
-          <option value="KIMBERLY NATALY PONCE ROMERO|GERENTE REGIONAL">KIMBERLY NATALY PONCE ROMERO - GERENTE REGIONAL</option>
-          <option value="ABIGAIL ROJAS ISIDRO|SECR. J.R.C.S">ABIGAIL ROJAS ISIDRO - SECR. J.R.C.S</option>
-          <option value="FERNANDA CALISAYA TABOADA|SECR. U.A.A">FERNANDA CALISAYA TABOADA - SECR. U.A.A.</option>
-        </select>
+      <label for="destinatarioSelect">Destinatario:</label>
+      <select name="destinatario" id="destinatarioSelect" onchange="actualizarCargoDestinatario()" required>
+        <option value="">Seleccionar destinatario</option>
+        <option value="ESTEPHANYA ALVAREZ VARGAS|SECRETARIA GENERAL">ESTEPHANYA ALVAREZ VARGAS - SECRETARIA GENERAL</option>
+        <option value="CELINA VARGAS NOGALES|CHOFER">CELINA VARGAS NOGALES - CHOFER</option>
+        <option value="PAOLA MOREIRA LEON|SECR. U.R.G.D">PAOLA MOREIRA LEON - SECR. U.R.G.D.</option>
+        <option value="KIMBERLY PONCE ROMERO|TECNICA DE CAMPO">KIMBERLY PONCE ROMERO - TECNICA DE CAMPO</option>
+        <option value="ABIGAIL ROJAS ISIDRO|PRESIDENTA REGIONAL">ABIGAIL ROJAS ISIDRO - PRESIDENTA REGIONAL</option>
+        <option value="FERNANDA CALISAYA TABOADA|JEFA J.R.C.S.">FERNANDA CALISAYA TABOADA - JEFA J.R.C.S.</option>
+        <option value="CELINA VARGAS NOGALES|RECEPCIONISTA">CELINA VARGAS NOGALES - RECEPCIONISTA</option>
+        <option value="ESTEPHANYA ALVAREZ VARGAS|JEFA U.A.A.">ESTEPHANYA ALVAREZ VARGAS - JEFA U.A.A</option>
+        <option value="KIMBERLY PONCE ROMERO|GERENTE REGIONAL">KIMBERLY PONCE ROMERO - GERENTE REGIONAL</option>
+        <option value="ABIGAIL ROJAS ISIDRO|SECR. J.R.C.S">ABIGAIL ROJAS ISIDRO - SECR. J.R.C.S</option>
+        <option value="FERNANDA CALISAYA TABOADA|SECR. U.A.A">FERNANDA CALISAYA TABOADA - SECR. U.A.A.</option>
+      </select>
 
-        <label for="cargoDestinatario">Cargo del destinatario:</label>
-        <input type="text" id="cargoDestinatario" name="cargoDestinatario" readonly />
+      <label for="cargoDestinatario">Cargo destinatario:</label>
+      <input type="text" id="cargoDestinatario" name="cargoDestinatario" readonly />
 
-        <label for="instructivo">Instructivo:</label>
-        <textarea id="instructivo" name="instructivo" rows="4" required></textarea>
-      </div>
+      <label for="instructivo">Instructivo:</label>
+      <textarea id="instructivo" name="instructivo" rows="5" required></textarea>
 
-      <button type="submit" id="generarBtn">Generar</button>
+      <button type="submit">Imprimir Instructivo</button>
     </form>
   </div>
 
