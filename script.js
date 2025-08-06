@@ -41,7 +41,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const instructivoTexto = doc.splitTextToSize(instructivo, 185);
   doc.text(instructivoTexto, 12, 118);
 
-  // Generar URL Blob y abrir nueva ventana para imprimir
+ // Abre la vista para imprimir
   const pdfUrl = doc.output('bloburl');
   const printWindow = window.open(pdfUrl);
   printWindow.focus();
@@ -49,6 +49,8 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
     printWindow.print();
   };
 
-  // Limpiar formulario después de abrir ventana de impresión
-  this.reset();
+  // Limpia el formulario 1 segundo después para que no borre antes de imprimir
+  setTimeout(() => {
+    form.reset();
+  }, 1000);
 });
