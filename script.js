@@ -24,7 +24,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   const cargo = document.getElementById("cargoDestinatario").value;
   const instructivo = document.getElementById("instructivo").value;
 
-  const contenidoHTML = 
+  const contenidoHTML = `
     <html>
     <head>
       <title>Hoja de Correspondencia</title>
@@ -65,7 +65,7 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
       </script>
     </body>
     </html>
-  ;
+  `;
 
   const ventana = window.open("", "_blank");
   ventana.document.write(contenidoHTML);
