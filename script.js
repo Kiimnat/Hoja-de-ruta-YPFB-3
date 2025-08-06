@@ -29,21 +29,15 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
 
   // Recuadro con título
   doc.setFont("helvetica", "bold");
-  doc.rect(10, 70, 190, 50); // Ampliado a 50 para incluir instructivo
-  doc.text("PRIMER DESTINATARIO:", 12, 75);
-
-  // Destinatario y cargo
+  doc.rect(10, 100, 190, 30); // Ampliado a 50 para incluir instructivo
+  doc.text("SEGUNDO DESTINATARIO:", 12, 105);
   doc.setFont("helvetica", "normal");
-  doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 75);
-
-  // Título instructivo
+  doc.text(`${destinatarioNombre} - ${cargoDestinatario}`, 65, 105);
   doc.setFont("helvetica", "bold");
-  doc.text("INSTRUCTIVO:", 12, 83);
-
-  // Contenido instructivo
+  doc.text("INSTRUCTIVO:", 12, 113);
   doc.setFont("helvetica", "normal");
   const instructivoTexto = doc.splitTextToSize(instructivo, 185);
-  doc.text(instructivoTexto, 12, 88);
+  doc.text(instructivoTexto, 12, 118);
 
   // Abre la vista para imprimir (opcional)
   window.open(doc.output('bloburl'), '_blank');
