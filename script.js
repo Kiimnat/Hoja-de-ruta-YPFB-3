@@ -15,6 +15,11 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
   e.preventDefault();
 
   const destinatarioRaw = document.getElementById("destinatarioSelect").value;
+  if (!destinatarioRaw) {
+    alert("Por favor selecciona un destinatario.");
+    return;
+  }
+
   const [destinatario] = destinatarioRaw.split("|");
   const cargo = document.getElementById("cargoDestinatario").value;
   const instructivo = document.getElementById("instructivo").value;
@@ -31,10 +36,19 @@ document.getElementById("correspondenciaForm").addEventListener("submit", functi
           border-radius: 8px;
           width: 500px;
           margin: auto;
-          font-size: 14px;
+          font-size: 10pt;
           line-height: 1.4;
         }
-        strong { display: inline-block; width: 120px; }
+        strong {
+          display: inline-block;
+          width: 120px;
+          font-weight: bold;
+          font-size: 10pt;
+        }
+        p {
+          margin: 5px 0;
+          font-size: 10pt;
+        }
       </style>
     </head>
     <body>
